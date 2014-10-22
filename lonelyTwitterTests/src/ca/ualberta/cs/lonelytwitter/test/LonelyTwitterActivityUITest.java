@@ -33,8 +33,25 @@ public class LonelyTwitterActivityUITest extends
 		assertNotNull(activity.findViewById(ca.ualberta.cs.lonelytwitter.R.id.save));
 		textInput.setText(text);
 		((Button) activity.findViewById(ca.ualberta.cs.lonelytwitter.R.id.save)).performClick();
+		
+		
 	}
 	
 //TODO: Add your code here:
+	
+	
+	@UiThreadTest
+	public void testMakeTweet(){
+		LonelyTwitterActivity lta = getActivity();
+		int oldLength = lta.getAdapter().getCount();
+		makeTweet("Hello");
+		ArrayAdapter<NormalTweetModel> aa = lta.getAdapter();
+		assertEquals(oldLength + 1, aa.getCount());
+		
+		assertTrue(aa.getItem(aa.getCount()-1) instanceof NormalTweetModel);
+		
+		//missed this part - lab machine froze
+		
+	}
 			
 }
